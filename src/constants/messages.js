@@ -8,4 +8,4 @@ const OUTPUT_MESSAGE = Object.freeze({
   completeGame: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
 });
 
-export default { INPUT_MESSAGE, OUTPUT_MESSAGE };
+export { INPUT_MESSAGE, OUTPUT_MESSAGE };

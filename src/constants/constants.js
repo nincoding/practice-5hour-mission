@@ -15,4 +15,4 @@ const NUMBER_CONDITION = Object.freeze({
   validLength: 3,
 });
 
-export default { USER_COMMAND, GAME_RESULT, NUMBER_CONDITION };
+export { USER_COMMAND, GAME_RESULT, NUMBER_CONDITION };

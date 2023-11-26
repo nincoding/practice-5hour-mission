@@ -16,4 +16,6 @@ const NUMBER_CONDITION = Object.freeze({
   completeMaxMatching: 3,
 });
 
-export { USER_COMMAND, GAME_RESULT, NUMBER_CONDITION };
+const DECIMAL_NUMBER = Object.freeze(10);
+
+export { USER_COMMAND, GAME_RESULT, NUMBER_CONDITION, DECIMAL_NUMBER };

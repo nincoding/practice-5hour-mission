@@ -1,4 +1,4 @@
-import { NUMBER_CONDITION } from '../../constants/constants.js';
+import { NUMBER_CONDITION, DECIMAL_NUMBER } from '../../constants/constants.js';
 
 class ComputerNumberGenerator {
   #computerNumber;
@@ -20,7 +20,7 @@ class ComputerNumberGenerator {
       uniqueSetNumbers.add(randomNumber);
     }
 
-    return parseInt([...uniqueSetNumbers].join(''), 10);
+    return parseInt([...uniqueSetNumbers].join(''), DECIMAL_NUMBER);
   }
 }
 

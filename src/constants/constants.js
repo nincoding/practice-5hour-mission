@@ -13,6 +13,7 @@ const NUMBER_CONDITION = Object.freeze({
   minRange: 1,
   maxRange: 9,
   validLength: 3,
+  completeMaxMatching: 3,
 });
 
 export { USER_COMMAND, GAME_RESULT, NUMBER_CONDITION };

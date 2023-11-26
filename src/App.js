@@ -1,5 +1,15 @@
+import BaseballGameController from './controller/BaseballGameController.js';
+
 class App {
-  async play() {}
+  #controller;
+
+  constructor() {
+    this.#controller = new BaseballGameController();
+  }
+
+  async play() {
+    await this.#controller.startGame();
+  }
 }
 
 export default App;

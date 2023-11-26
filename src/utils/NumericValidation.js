@@ -1,7 +1,7 @@
 const isNumeric = (input) => {
-  const allNumberRegExp = /^\d+$/;
+  const numberRegExp = /^\d+$/;
 
-  return allNumberRegExp.test(input) && !Number.isNaN(Number(input));
+  return numberRegExp.test(input) && !Number.isNaN(Number(input));
 };
 
 const isInteger = (input) => {

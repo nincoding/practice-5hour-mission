@@ -1,25 +1,21 @@
-import { Random } from '@woowacourse/mission-utils';
 import { NUMBER_CONDITION } from '../../constants/constants.js';
 
 class ComputerNumberGenerator {
   #computerNumber;
 
-  constructor() {
-    this.#computerNumber = this.#createRandomNumber();
+  constructor(randomNumberGenerator) {
+    this.#computerNumber = this.#createRandomNumber(randomNumberGenerator);
   }
 
   getComputerNumber() {
     return this.#computerNumber;
   }
 
-  #createRandomNumber() {
+  #createRandomNumber(randomNumberGenerator) {
     const uniqueSetNumbers = new Set();
 
     while (uniqueSetNumbers.size < NUMBER_CONDITION.validLength) {
-      const randomNumber = Random.pickNumberInRange(
-        NUMBER_CONDITION.minRange,
-        NUMBER_CONDITION.maxRange
-      );
+      const randomNumber = randomNumberGenerator();
 
       uniqueSetNumbers.add(randomNumber);
     }

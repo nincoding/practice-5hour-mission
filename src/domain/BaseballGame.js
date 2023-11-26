@@ -1,4 +1,3 @@
-import ComputerNumberGenerator from './models/ComputerNumberGenerator.js';
 import { NUMBER_CONDITION } from '../constants/constants.js';
 
 class BaseballGame {
@@ -6,8 +5,8 @@ class BaseballGame {
   #compareResult;
   #isCompleteCondition = false;
 
-  constructor() {
-    this.#computerNumber = new ComputerNumberGenerator().getComputerNumber();
+  constructor(computerNumberGenerator) {
+    this.#computerNumber = computerNumberGenerator.getComputerNumber();
   }
 
   getCompleteCondition() {

@@ -1,22 +1,24 @@
 import BaseballGame from '../domain/BaseballGame.js';
+import ComputerNumberGenerator from '../domain/models/ComputerNumberGenerator.js';
 import InputValidator from '../domain/validators/InputValidator.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
+import randomNumberGenerator from '../utils/RandomNumberGenerator.js';
 import { USER_COMMAND } from '../constants/constants.js';
 
 class BaseballGameController {
   #baseballGame;
-  #isCompleteCondition;
 
   constructor() {
     OutputView.printStartMessage();
   }
 
   async startGame() {
-    this.#baseballGame = new BaseballGame();
-    this.#isCompleteCondition = this.#baseballGame.getCompleteCondition();
+    const computerNumberGenerator = new ComputerNumberGenerator(randomNumberGenerator);
+    this.#baseballGame = new BaseballGame(computerNumberGenerator);
+    let isCompleteCondition = this.#baseballGame.getCompleteCondition();
 
-    while (!this.#isCompleteCondition) {
+    while (!isCompleteCondition) {
       const userNumber = await InputView.readUserNumber();
 
       InputValidator.validateUserNumber(userNumber);
@@ -25,7 +27,7 @@ class BaseballGameController {
 
       OutputView.printCompareResult(ball, strike);
 
-      this.#isCompleteCondition = this.#baseballGame.getCompleteCondition();
+      isCompleteCondition = this.#baseballGame.getCompleteCondition();
     }
 
     OutputView.printCompleteMessage();

@@ -1,5 +1,4 @@
-import CarNameValidator from '../validators/CarNameValidator.js';
-import RoundNumberValidator from '../validators/RoundNumberValidator.js';
+import EmptyInputValidator from '../validators/EmptyInputValidator.js';
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../constants/messages.js';
 
@@ -7,7 +6,7 @@ class InputView {
   async readCarNames() {
     const carNames = await Console.readLineAsync(INPUT_MESSAGE.requireCarNames);
 
-    CarNameValidator.validateInputCars(carNames);
+    EmptyInputValidator.validateNotEmptyInput(carNames);
 
     return carNames;
   }
@@ -15,7 +14,7 @@ class InputView {
   async readRoundNumber() {
     const roundNumber = await Console.readLineAsync(INPUT_MESSAGE.requireRoundNumber);
 
-    RoundNumberValidator.validateInputRound(roundNumber);
+    EmptyInputValidator.validateNotEmptyInput(roundNumber);
 
     return roundNumber;
   }

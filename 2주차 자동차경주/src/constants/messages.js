@@ -4,13 +4,16 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
-  print_: '',
+  printResultMessage: '',
+  printWinnerMessage: '',
 });
 
 const PREFIX_ERROR = Object.freeze('[ERROR]');
 
 const ERROR_MESSAGE = Object.freeze({
-  invalid_: '',
+  invalidInput: '',
+  invalidCarName: '',
+  invalidRoundNumber: '',
 });
 
 export { INPUT_MESSAGE, OUTPUT_MESSAGE, PREFIX_ERROR, ERROR_MESSAGE };

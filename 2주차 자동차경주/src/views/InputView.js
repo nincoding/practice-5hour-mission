@@ -7,7 +7,7 @@ class InputView {
   async readCarNames() {
     const carNames = await Console.readLineAsync(INPUT_MESSAGE.requireCarNames);
 
-    CarNameValidator.validateNames(carNames);
+    CarNameValidator.validateInputCars(carNames);
 
     return carNames;
   }
@@ -15,7 +15,7 @@ class InputView {
   async readRoundNumber() {
     const roundNumber = await Console.readLineAsync(INPUT_MESSAGE.requireRoundNumber);
 
-    RoundNumberValidator.validateNames(roundNumber);
+    RoundNumberValidator.validateInputRound(roundNumber);
 
     return roundNumber;
   }

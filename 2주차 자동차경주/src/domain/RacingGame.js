@@ -1,17 +1,14 @@
-import CarNameValidator from '../validators/CarNameValidator.js';
-import RoundNumberValidator from '../validators/RoundNumberValidator.js';
-import Car from '../models/Car.js';
 import { RACING_CONDITION } from '../constants/constants.js';
 
 class RacingGame {
   #cars;
   #round;
 
-  constructor(carNames, round) {
-    CarNameValidator.validateCarNames(carNames);
-    RoundNumberValidator.validateRoundNumber(round);
+  constructor(carNames, round, validator, car) {
+    validator.CarNameValidator.validateCarNames(carNames);
+    validator.RoundNumberValidator.validateRoundNumber(round);
 
-    this.#cars = carNames.map((carName) => new Car(carName));
+    this.#cars = carNames.map((carName) => new car(carName, validator.CarNameValidator));
     this.#round = round;
   }
 

@@ -1,11 +1,11 @@
-import CarNameValidator from '../validators/CarNameValidator.js';
+import { RACING_CONDITION } from '../constants/constants.js';
 
 class Car {
   #name;
-  #progress = 0;
+  #progress = RACING_CONDITION.startRange;
 
-  constructor(name) {
-    CarNameValidator.validateCarName(name);
+  constructor(name, validator) {
+    validator.validateCarName(name);
 
     this.#name = name;
   }
@@ -19,7 +19,7 @@ class Car {
   }
 
   move() {
-    this.#progress += 1;
+    this.#progress += RACING_CONDITION.oneStep;
   }
 }
 

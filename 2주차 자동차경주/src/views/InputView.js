@@ -1,12 +1,15 @@
-import EmptyInputValidator from '../validators/EmptyInputValidator.js';
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../constants/messages.js';
 
 class InputView {
+  constructor(validator) {
+    this.validator = validator;
+  }
+
   async readCarNames() {
     const carNames = await Console.readLineAsync(INPUT_MESSAGE.requireCarNames);
 
-    EmptyInputValidator.validateNotEmptyInput(carNames);
+    this.validator.validateNotEmptyInput(carNames);
 
     return carNames;
   }
@@ -14,7 +17,7 @@ class InputView {
   async readRoundNumber() {
     const roundNumber = await Console.readLineAsync(INPUT_MESSAGE.requireRoundNumber);
 
-    EmptyInputValidator.validateNotEmptyInput(roundNumber);
+    this.validator.validateNotEmptyInput(roundNumber);
 
     return roundNumber;
   }

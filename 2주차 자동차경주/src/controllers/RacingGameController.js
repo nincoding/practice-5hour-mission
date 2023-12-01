@@ -1,3 +1,6 @@
+import { splitInput, randomNumberGenerator } from '../helpers/helpers.js';
+import { DECIMAL } from '../constants/constants.js';
+
 class RacingGameController {
   #domain;
   #inputView;
@@ -10,9 +13,24 @@ class RacingGameController {
   }
 
   async start() {
-    const carNames = await this.#inputView.readCarNames();
+    const inputCarNames = await this.#inputView.readCarNames();
+    const splitCarNames = splitInput(inputCarNames);
+    const inputRoundNumber = await this.#inputView.readRoundNumber();
+    const roundNumber = parseInt(inputRoundNumber, DECIMAL);
 
-    console.log(carNames);
+    this.#domain = new this.#domain(splitCarNames, roundNumber);
+    this.#outputView.printResultMessage();
+
+    while (!this.#domain.isFinish()) {
+      this.#domain.racing(randomNumberGenerator);
+      const currentResult = this.#domain.getRoundResult();
+
+      this.#outputView.printRoundResult(currentResult);
+    }
+
+    const winnerResult = this.#domain.getWinners();
+
+    this.#outputView.printWinners(winnerResult);
   }
 }
 

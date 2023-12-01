@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { RACING_CONDITION } from '../constants/constants.js';
+import { SYMBOL } from '../constants/messages.js';
 
 /**
  * 주어진 입력이 숫자인지 확인하는 유틸리티 함수
@@ -30,4 +31,13 @@ export const isInteger = (input) => {
  */
 export const randomNumberGenerator = () => {
   return Random.pickNumberInRange(RACING_CONDITION.startRange, RACING_CONDITION.endRandge);
+};
+
+/**
+ * 입력값을 콤마를 기준으로 분리하여 배열을 반환하는 유틸리티 함수
+ *
+ * @returns {string[]} - 콤마를 기준으로 분리한 문자배열을 반환한다.
+ */
+export const splitInput = (inputs) => {
+  return inputs.split(SYMBOL.comma).map((input) => input.trim());
 };

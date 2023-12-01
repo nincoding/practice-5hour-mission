@@ -10,14 +10,26 @@ class OutputView {
     Console.print(OUTPUT_MESSAGE.printResultMessage);
   }
 
-  // TODO: 각 실행결과를 자동차 이름 : 전진값마다 -로 출력 포맷
   printRoundResult(roundResult) {
-    Console.print(roundResult);
+    let resultMessage = SYMBOL.emptyString;
+
+    roundResult.forEach(({ carName, countProgress }) => {
+      const formatProgress = SYMBOL.printProgress.repeat(countProgress);
+
+      resultMessage += `${carName}${SYMBOL.printColon}${formatProgress}${SYMBOL.spaceLine}`;
+    });
+
+    Console.print(resultMessage);
   }
 
-  // TODO: 최종 우승자 배열로 전달받으면 콤마로 구분
   printWinners(winners) {
-    Console.print(`${OUTPUT_MESSAGE.printWinnerMessage}${winners}`);
+    let resultMessage = SYMBOL.emptyString;
+
+    resultMessage += `${OUTPUT_MESSAGE.printWinnerMessage}${SYMBOL.printColon}${winners.join(
+      SYMBOL.commaSpace
+    )}`;
+
+    Console.print(resultMessage);
   }
 }
 

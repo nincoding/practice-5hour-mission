@@ -1,9 +1,13 @@
 import CustomError from '../errors/CustomError.js';
+import { ERROR_CONDITION } from '../constants/constants.js';
 
 class EmptyInputValidator {
-  // TODO: 빈 문자열이나 공백이면 안됨
   static validateNotEmptyInput(input) {
-    if (!this._(input)) throw new CustomError.EmptyInput();
+    if (this.#isEmpty(input)) throw CustomError.emptyInput();
+  }
+
+  static #isEmpty(input) {
+    return input.trim() === ERROR_CONDITION.emptyString;
   }
 }
 

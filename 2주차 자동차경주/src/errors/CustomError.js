@@ -5,15 +5,15 @@ class CustomError extends Error {
     super(`${PREFIX_ERROR} ${message}`);
   }
 
-  static EmptyInput() {
+  static emptyInput() {
     return new CustomError(ERROR_MESSAGE.invalidInput);
   }
 
-  static inputCarName() {
+  static carName() {
     return new CustomError(ERROR_MESSAGE.invalidCarName);
   }
 
-  static inputRoundNumber() {
+  static roundNumber() {
     return new CustomError(ERROR_MESSAGE.invalidRoundNumber);
   }
 }

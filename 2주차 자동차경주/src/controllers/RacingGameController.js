@@ -11,6 +11,8 @@ class RacingGameController {
 
   async start() {
     const carNames = await this.#inputView.readCarNames();
+
+    console.log(carNames);
   }
 }
 

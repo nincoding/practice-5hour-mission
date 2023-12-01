@@ -10,4 +10,8 @@ const RACING_CONDITION = Object.freeze({
   oneStep: 1,
 });
 
-export { CAR_NAME_CONDITION, ROUND_NUMBER_CONDITION, RACING_CONDITION };
+const ERROR_CONDITION = Object.freeze({
+  emptyString: '',
+});
+
+export { CAR_NAME_CONDITION, ROUND_NUMBER_CONDITION, RACING_CONDITION, ERROR_CONDITION };

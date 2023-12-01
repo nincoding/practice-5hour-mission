@@ -9,7 +9,7 @@ class App {
   #controller;
 
   constructor() {
-    this.#domain = new RacingGame();
+    this.#domain = RacingGame;
     this.#views = {
       inputView: new InputView(),
       outputView: new OutputView(),

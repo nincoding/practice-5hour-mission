@@ -5,7 +5,7 @@ class Car {
   #progress = 0;
 
   constructor(name) {
-    // CarNameValidator.validateCarName(name);
+    CarNameValidator.validateCarName(name);
 
     this.#name = name;
   }

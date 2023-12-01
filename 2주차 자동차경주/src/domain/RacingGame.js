@@ -8,8 +8,8 @@ class RacingGame {
   #round;
 
   constructor(carNames, round) {
-    // CarNameValidator.validateCarNames(carNames);
-    // RoundNumberValidator.validateRoundNumber(round);
+    CarNameValidator.validateCarNames(carNames);
+    RoundNumberValidator.validateRoundNumber(round);
 
     this.#cars = carNames.map((carName) => new Car(carName));
     this.#round = round;

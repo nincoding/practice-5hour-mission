@@ -1,3 +1,5 @@
+import { SYMBOL } from './constants.js';
+
 const INPUT_MESSAGE = Object.freeze({
   requireCarNames: `경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)${SYMBOL.spaceLine}`,
   requireRoundNumber: `시도할 횟수는 몇 회인가요?${SYMBOL.spaceLine}`,
@@ -8,15 +10,6 @@ const OUTPUT_MESSAGE = Object.freeze({
   printWinnerMessage: '최종 우승자',
 });
 
-const SYMBOL = Object.freeze({
-  printColon: ' : ',
-  printProgress: '-',
-  comma: ',',
-  emptyString: '',
-  commaSpace: ', ',
-  spaceLine: '\n',
-});
-
 const PREFIX_ERROR = Object.freeze('[ERROR]');
 
 const ERROR_MESSAGE = Object.freeze({
@@ -25,4 +18,4 @@ const ERROR_MESSAGE = Object.freeze({
   invalidRoundNumber: '숫자가 잘못된 형식입니다.',
 });
 
-export { INPUT_MESSAGE, OUTPUT_MESSAGE, PREFIX_ERROR, ERROR_MESSAGE, SYMBOL };
+export { INPUT_MESSAGE, OUTPUT_MESSAGE, PREFIX_ERROR, ERROR_MESSAGE };

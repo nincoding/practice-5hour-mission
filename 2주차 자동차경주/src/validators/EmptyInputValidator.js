@@ -1,5 +1,5 @@
 import CustomError from '../errors/CustomError.js';
-import { ERROR_CONDITION } from '../constants/constants.js';
+import { SYMBOL } from '../constants/constants.js';
 
 class EmptyInputValidator {
   static validateNotEmptyInput(input) {
@@ -7,7 +7,7 @@ class EmptyInputValidator {
   }
 
   static #isEmpty(input) {
-    return input.trim() === ERROR_CONDITION.emptyString;
+    return input && input.trim() === SYMBOL.emptyString;
   }
 }
 

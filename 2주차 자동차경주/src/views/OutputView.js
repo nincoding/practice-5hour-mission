@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT_MESSAGE, SYMBOL } from '../constants/messages.js';
+import { OUTPUT_MESSAGE } from '../constants/messages.js';
+import { SYMBOL } from '../constants/constants.js';
 
 class OutputView {
   printErrorMessage(messages) {

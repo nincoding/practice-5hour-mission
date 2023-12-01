@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { RACING_CONDITION } from '../constants/constants.js';
-import { SYMBOL } from '../constants/messages.js';
+import { SYMBOL } from '../constants/constants.js';
 
 /**
  * 주어진 입력이 숫자인지 확인하는 유틸리티 함수

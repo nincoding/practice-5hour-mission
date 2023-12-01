@@ -1,6 +1,8 @@
-const CAR_NAME_CONDITION = Object.freeze({});
-
-const ROUND_NUMBER_CONDITION = Object.freeze({});
+const CAR_NAME_CONDITION = Object.freeze({
+  minLength: 1,
+  maxLength: 5,
+  minCount: 2,
+});
 
 const RACING_CONDITION = Object.freeze({
   startRange: 0,
@@ -12,8 +14,13 @@ const RACING_CONDITION = Object.freeze({
 
 const DECIMAL = Object.freeze(10);
 
-const ERROR_CONDITION = Object.freeze({
+const SYMBOL = Object.freeze({
+  printColon: ' : ',
+  printProgress: '-',
+  comma: ',',
   emptyString: '',
+  commaSpace: ', ',
+  spaceLine: '\n',
 });
 
-export { CAR_NAME_CONDITION, ROUND_NUMBER_CONDITION, RACING_CONDITION, ERROR_CONDITION, DECIMAL };
+export { CAR_NAME_CONDITION, RACING_CONDITION, DECIMAL, SYMBOL };

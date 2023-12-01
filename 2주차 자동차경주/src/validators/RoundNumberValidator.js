@@ -1,9 +1,15 @@
 import CustomError from '../errors/CustomError.js';
+import { isNumeric, isInteger } from '../helpers/helpers.js';
+import { RACING_CONDITION } from '../constants/constants.js';
 
 class RoundNumberValidator {
-  // TODO: 숫자(정수)만 유효, 1회 이상만 유효
   static validateRoundNumber(round) {
-    if (!this._(round)) throw new CustomError.roundNumber();
+    if (!this.#isValidRange(round)) throw CustomError.roundNumber();
+    if (!isNumeric(round) || !isInteger(round)) throw CustomError.roundNumber();
+  }
+
+  static #isValidRange(round) {
+    return round > RACING_CONDITION.startRange;
   }
 }
 

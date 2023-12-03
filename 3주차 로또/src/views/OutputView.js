@@ -6,8 +6,8 @@ class OutputView {
     Console.print(messages);
   }
 
-  print_() {
-    Console.print(OUTPUT_MESSAGE.print_);
+  printPurchaseTicket(ticket) {
+    Console.print(OUTPUT_MESSAGE.printPurchaseTicket(ticket));
   }
 }
 

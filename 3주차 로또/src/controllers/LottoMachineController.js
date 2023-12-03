@@ -25,7 +25,7 @@ class LottoMachineController {
     const purchase = new Purchase(purchaseAmount);
     const ticket = purchase.getTicketAmount();
 
-    console.log(ticket);
+    this.#outputView.printPurchaseTicket(ticket);
   }
 }
 

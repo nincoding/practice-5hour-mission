@@ -7,7 +7,7 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
-  print_: '',
+  printPurchaseTicket: (ticket) => `${SYMBOL.spaceLine}${ticket}개를 구매했습니다.`,
 });
 
 const PREFIX_ERROR = Object.freeze('[ERROR]');

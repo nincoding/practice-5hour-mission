@@ -1,3 +1,6 @@
+import { Random } from '@woowacourse/mission-utils';
+import { LOTTO_CONDITION } from '../constants/constants.js';
+
 /**
  * 주어진 입력이 숫자인지 확인하는 유틸리티 함수
  *
@@ -37,4 +40,12 @@ export const errorHandler = async (action, printError) => {
       printError(message);
     }
   }
+};
+
+export const randomNumberGenerator = () => {
+  return Random.pickUniqueNumbersInRange(
+    LOTTO_CONDITION.minRange,
+    LOTTO_CONDITION.maxRange,
+    LOTTO_CONDITION.lottoLength
+  );
 };

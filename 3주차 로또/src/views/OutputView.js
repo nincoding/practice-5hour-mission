@@ -9,6 +9,12 @@ class OutputView {
   printPurchaseTicket(ticket) {
     Console.print(OUTPUT_MESSAGE.printPurchaseTicket(ticket));
   }
+
+  printLottoTicket(lottoTicket) {
+    const lottos = lottoTicket.map((lotto) => `[${lotto.join(', ')}]`).join('\n');
+
+    Console.print(`${lottos}\n`);
+  }
 }
 
 export default OutputView;

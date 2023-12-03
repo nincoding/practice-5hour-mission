@@ -1,3 +1,4 @@
+import Purchase from '../models/Purchase.js';
 import { errorHandler } from '../helpers/helpers.js';
 
 class LottoMachineController {
@@ -14,12 +15,17 @@ class LottoMachineController {
   async start() {
     const printError = (message) => this.#outputView.printErrorMessage(message);
 
-    const inputPurshaseAmount = await errorHandler(
-      async () => await this.#inputView.readPurchaseAmount(),
-      printError
-    );
+    await errorHandler(async () => await this.#requirePurchaseAmount(), printError);
+  }
 
-    const purshanseAmount = parseInt(inputPurshaseAmount, 10);
+  async #requirePurchaseAmount() {
+    const inputPurshaseAmount = await this.#inputView.readPurchaseAmount();
+
+    const purchaseAmount = parseInt(inputPurshaseAmount, 10);
+    const purchase = new Purchase(purchaseAmount);
+    const ticket = purchase.getTicketAmount();
+
+    console.log(ticket);
   }
 }
 

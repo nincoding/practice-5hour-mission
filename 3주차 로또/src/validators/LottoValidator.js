@@ -16,6 +16,12 @@ class LottoValidator {
     if (!this.#isValidRange(number)) throw CustomError.lotto(ERROR_MESSAGE.invalidLottoRange);
   }
 
+  static validateBonusNumber(number, winningLotto) {
+    LottoValidator.validateLottoNumber(number);
+
+    if (winningLotto.includes(number)) throw CustomError.bonus(ERROR_MESSAGE.invalidBonusUnique);
+  }
+
   static #isValidLottoLength(lotto) {
     return lotto.length === LOTTO_CONDITION.lottoLength;
   }

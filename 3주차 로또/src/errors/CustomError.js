@@ -16,6 +16,10 @@ class CustomError extends Error {
   static lotto(errorMessage) {
     return new CustomError(errorMessage);
   }
+
+  static Bonus() {
+    return new CustomError(ERROR_MESSAGE.invalidBonusUnique);
+  }
 }
 
 export default CustomError;

@@ -1,7 +1,7 @@
+import Lotto from '../Lotto.js';
+import Bonus from '../models/Bonus.js';
 import Purchase from '../models/Purchase.js';
 import { errorHandler, splitInput } from '../helpers/helpers.js';
-import Lotto from '../Lotto.js';
-import LottoValidator from '../validators/LottoValidator.js';
 
 class LottoMachineController {
   #domain;
@@ -15,47 +15,28 @@ class LottoMachineController {
   }
 
   async start() {
-    const printError = (message) => this.#outputView.printErrorMessage(message);
-
-    const purchaseAmount = await errorHandler(
-      async () => await this.#requirePurchaseAmount(),
-      printError
-    );
-
-    const winningLotto = await errorHandler(
-      async () => await this.#requireWinningNumber(),
-      printError
-    );
-
-    const bonusNumber = await errorHandler(
-      async () => await this.#requireBonusNumber(winningLotto),
-      printError
-    );
+    const { purchaseAmount, ticket, lottos, winningLotto, bonusNumber } =
+      await this.#initInputData();
 
     const matchingData = this.#domain.getMatchingLottos(winningLotto, bonusNumber);
-
     const winStatistics = this.#domain.getWinStatistics(matchingData);
     const totalPrize = this.#domain.getTotalPrize(winStatistics);
     const profitRatio = this.#domain.getProfitRatio(totalPrize, purchaseAmount);
 
-    this.#outputView.printWinsStatistics(winStatistics);
-    this.#outputView.printProfitRatio(profitRatio);
+    this.#printResult(ticket, lottos, winStatistics, profitRatio);
   }
 
   async #requirePurchaseAmount() {
-    const inputPurshaseAmount = await this.#inputView.readPurchaseAmount();
+    const inputPurchaseAmount = await this.#inputView.readPurchaseAmount();
 
-    const purchaseAmount = Number(inputPurshaseAmount);
+    const purchaseAmount = Number(inputPurchaseAmount);
     const purchase = new Purchase(purchaseAmount);
-    const ticket = purchase.getTicketAmount();
 
+    const ticket = purchase.getTicketAmount();
     this.#domain = new this.#domain(ticket);
     const lottos = this.#domain.getLottoTickets();
 
-    this.#outputView.printPurchaseTicket(ticket);
-    this.#outputView.printLottoTicket(lottos);
-
-    return purchaseAmount;
+    return { purchaseAmount, ticket, lottos };
   }
 
   async #requireWinningNumber() {
@@ -71,14 +52,37 @@ class LottoMachineController {
     const inputBonusNumber = await this.#inputView.readBonusNumber();
 
     const bonusNumber = Number(inputBonusNumber);
+    const bonus = new Bonus(bonusNumber, winningLotto);
 
-    LottoValidator.validateLottoNumber(bonusNumber);
+    return bonus.getBonusNumber();
+  }
 
-    if (winningLotto.includes(bonusNumber)) {
-      throw new Error('[ERROR] 보너스 번호는 중복되지 않아야 합니다.');
-    }
+  async #initInputData() {
+    const printError = (message) => this.#outputView.printErrorMessage(message);
 
-    return bonusNumber;
+    const { purchaseAmount, ticket, lottos } = await errorHandler(
+      async () => await this.#requirePurchaseAmount(),
+      printError
+    );
+
+    const winningLotto = await errorHandler(
+      async () => await this.#requireWinningNumber(),
+      printError
+    );
+
+    const bonusNumber = await errorHandler(
+      async () => await this.#requireBonusNumber(winningLotto),
+      printError
+    );
+
+    return { purchaseAmount, ticket, lottos, winningLotto, bonusNumber };
+  }
+
+  #printResult(ticket, lottos, winStatistics, profitRatio) {
+    this.#outputView.printPurchaseTicket(ticket);
+    this.#outputView.printLottoTicket(lottos);
+    this.#outputView.printWinsStatistics(winStatistics);
+    this.#outputView.printProfitRatio(profitRatio);
   }
 }
 

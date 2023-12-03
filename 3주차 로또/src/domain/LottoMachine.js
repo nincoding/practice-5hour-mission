@@ -1,11 +1,14 @@
 import Lotto from '../Lotto.js';
-import { INIT_STATISTIC, PRIZE } from '../constants/constants.js';
+import CustomError from '../errors/CustomError.js';
 import { randomNumberGenerator } from '../helpers/helpers.js';
+import { INIT_STATISTIC, PRIZE } from '../constants/constants.js';
 
 class LottoMachine {
   #lottoTickets = [];
 
   constructor(ticket) {
+    if (!ticket) throw CustomError.Ticket();
+
     this.#lottoTickets = this.#createLottoTickets(ticket);
   }
 

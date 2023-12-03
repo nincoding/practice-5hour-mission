@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_CONDITION } from '../constants/constants.js';
+import { LOTTO_CONDITION, SYMBOL } from '../constants/constants.js';
 
 /**
  * 주어진 입력이 숫자인지 확인하는 유틸리티 함수
@@ -48,4 +48,8 @@ export const randomNumberGenerator = () => {
     LOTTO_CONDITION.maxRange,
     LOTTO_CONDITION.lottoLength
   );
+};
+
+export const splitInput = (inputs) => {
+  return inputs.split(SYMBOL.comma).map((input) => Number(input.trim()));
 };

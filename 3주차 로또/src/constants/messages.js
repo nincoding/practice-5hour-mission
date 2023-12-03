@@ -2,8 +2,8 @@ import { SYMBOL } from './constants.js';
 
 const INPUT_MESSAGE = Object.freeze({
   requirePurchaseAmount: `구입금액을 입력해 주세요.${SYMBOL.spaceLine}`,
-  requireWinningNumber: `당첨 번호를 입력해 주세요.${SYMBOL.spaceLine}`,
-  requireBonusNumber: `보너스 번호를 입력해 주세요.${SYMBOL.spaceLine}`,
+  requireWinningNumber: `${SYMBOL.spaceLine}당첨 번호를 입력해 주세요.${SYMBOL.spaceLine}`,
+  requireBonusNumber: `${SYMBOL.spaceLine}보너스 번호를 입력해 주세요.${SYMBOL.spaceLine}`,
 });
 
 const OUTPUT_MESSAGE = Object.freeze({

@@ -1,5 +1,7 @@
 import Purchase from '../models/Purchase.js';
-import { errorHandler } from '../helpers/helpers.js';
+import { errorHandler, splitInput } from '../helpers/helpers.js';
+import Lotto from '../Lotto.js';
+import LottoValidator from '../validators/LottoValidator.js';
 
 class LottoMachineController {
   #domain;
@@ -16,12 +18,22 @@ class LottoMachineController {
     const printError = (message) => this.#outputView.printErrorMessage(message);
 
     await errorHandler(async () => await this.#requirePurchaseAmount(), printError);
+
+    const winningLotto = await errorHandler(
+      async () => await this.#requireWinningNumber(),
+      printError
+    );
+
+    const bonusNumber = await errorHandler(
+      async () => await this.#requireBonusNumber(winningLotto),
+      printError
+    );
   }
 
   async #requirePurchaseAmount() {
     const inputPurshaseAmount = await this.#inputView.readPurchaseAmount();
 
-    const purchaseAmount = parseInt(inputPurshaseAmount, 10);
+    const purchaseAmount = Number(inputPurshaseAmount);
     const purchase = new Purchase(purchaseAmount);
     const ticket = purchase.getTicketAmount();
 
@@ -30,6 +42,29 @@ class LottoMachineController {
 
     this.#outputView.printPurchaseTicket(ticket);
     this.#outputView.printLottoTicket(lottos);
+  }
+
+  async #requireWinningNumber() {
+    const inputWinningNumber = await this.#inputView.readWinningNumber();
+
+    const winningNumber = splitInput(inputWinningNumber);
+    const winningLotto = new Lotto(winningNumber);
+
+    return winningLotto.getLottoSortedNumbers();
+  }
+
+  async #requireBonusNumber(winningLotto) {
+    const inputBonusNumber = await this.#inputView.readBonusNumber();
+
+    const bonusNumber = Number(inputBonusNumber);
+
+    LottoValidator.validateLottoNumber(bonusNumber);
+
+    if (winningLotto.includes(bonusNumber)) {
+      throw new Error('[ERROR] 보너스 번호는 중복되지 않아야 합니다.');
+    }
+
+    return bonusNumber;
   }
 }
 

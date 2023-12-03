@@ -10,6 +10,7 @@ const _COMMAND = Object.freeze({});
 const SYMBOL = Object.freeze({
   emptyString: '',
   spaceLine: '\n',
+  comma: ',',
 });
 
 export { LOTTO_CONDITION, _COMMAND, SYMBOL };

@@ -7,7 +7,7 @@ class EmptyInputValidator {
   }
 
   static #isEmpty(input) {
-    return input && input.trim() === SYMBOL.emptyString;
+    return input.trim() === SYMBOL.emptyString;
   }
 }
 

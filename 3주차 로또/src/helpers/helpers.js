@@ -30,9 +30,9 @@ export const isInteger = (input) => {
 export const errorHandler = async (action, printError) => {
   while (true) {
     try {
-      await action();
+      const result = await action();
 
-      break;
+      return result;
     } catch ({ message }) {
       printError(message);
     }

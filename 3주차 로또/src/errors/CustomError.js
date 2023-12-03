@@ -8,6 +8,10 @@ class CustomError extends Error {
   static emptyInput() {
     return new CustomError(ERROR_MESSAGE.invalidInput);
   }
+
+  static purchaseAmount() {
+    return new CustomError(ERROR_MESSAGE.invalidPurchaseAmount);
+  }
 }
 
 export default CustomError;

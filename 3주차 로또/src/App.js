@@ -9,7 +9,7 @@ class App {
   #controller;
 
   constructor() {
-    this.#domain = new LottoMachine();
+    this.#domain = LottoMachine;
     this.#views = {
       inputView: new InputView(),
       outputView: new OutputView(),

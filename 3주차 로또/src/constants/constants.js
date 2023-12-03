@@ -5,7 +5,13 @@ const LOTTO_CONDITION = Object.freeze({
   maxRange: 45,
 });
 
-const _COMMAND = Object.freeze({});
+const INIT_STATISTIC = {
+  fifthPrize: 0,
+  fourthPrize: 0,
+  thirdPrize: 0,
+  secondPrize: 0,
+  firstPrize: 0,
+};
 
 const SYMBOL = Object.freeze({
   emptyString: '',
@@ -13,4 +19,4 @@ const SYMBOL = Object.freeze({
   comma: ',',
 });
 
-export { LOTTO_CONDITION, _COMMAND, SYMBOL };
+export { LOTTO_CONDITION, INIT_STATISTIC, SYMBOL };

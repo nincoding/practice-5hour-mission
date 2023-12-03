@@ -10,7 +10,11 @@ class CustomError extends Error {
   }
 
   static purchaseAmount() {
-    return new CustomError(ERROR_MESSAGE.invalidPurchaseAmount);
+    return new CustomError(ERROR_MESSAGE.invalidTypeNumber);
+  }
+
+  static lotto(errorMessage) {
+    return new CustomError(errorMessage);
   }
 }
 

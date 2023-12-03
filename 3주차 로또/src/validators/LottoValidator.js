@@ -1,18 +1,19 @@
 import CustomError from '../errors/CustomError.js';
 import { isNumeric, isInteger } from '../helpers/helpers.js';
 import { LOTTO_CONDITION } from '../constants/constants.js';
+import { ERROR_MESSAGE } from '../constants/messages.js';
 
 class LottoValidator {
   static validateLotto(lotto) {
-    if (!this.#isValidLottoLength(lotto)) throw CustomError.lotto();
-    if (!this.#isValidUniqueLotto(lotto)) throw CustomError.lotto();
+    if (!this.#isValidLottoLength(lotto)) throw CustomError.lotto(ERROR_MESSAGE.invalidLottoLength);
+    if (!this.#isValidUniqueLotto(lotto)) throw CustomError.lotto(ERROR_MESSAGE.invalidLottoUnique);
   }
 
   static validateLottoNumber(number) {
     if (!(isNumeric(number) && isInteger(number))) {
-      throw CustomError.lotto();
+      throw CustomError.lotto(ERROR_MESSAGE.invalidTypeNumber);
     }
-    if (!this.#isValidRange(number)) throw CustomError.lotto();
+    if (!this.#isValidRange(number)) throw CustomError.lotto(ERROR_MESSAGE.invalidLottoRange);
   }
 
   static #isValidLottoLength(lotto) {

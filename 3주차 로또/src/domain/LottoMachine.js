@@ -1,4 +1,5 @@
 import Lotto from '../Lotto.js';
+import { INIT_STATISTIC, PRIZE } from '../constants/constants.js';
 import { randomNumberGenerator } from '../helpers/helpers.js';
 
 class LottoMachine {
@@ -18,19 +19,39 @@ class LottoMachine {
     });
   }
 
+  getWinStatistics(matchingData) {
+    const resultStatistics = { ...INIT_STATISTIC };
+
+    matchingData.forEach(({ matchingCount, hasBonusNumber }) => {
+      this.#calcStatistics(resultStatistics, matchingCount, hasBonusNumber);
+    });
+
+    return resultStatistics;
+  }
+
+  getTotalPrize(resultStatistics) {
+    return Object.entries(resultStatistics).reduce((acc, [prizeKey, count]) => {
+      return acc + PRIZE[prizeKey] * count;
+    }, 0);
+  }
+
+  getProfitRatio(totalPrize, purchaseAmount) {
+    return ((totalPrize / purchaseAmount) * 100).toFixed(1);
+  }
+
   #createLottoTickets(ticket) {
     return Array.from({ length: ticket }, () => {
       return new Lotto(randomNumberGenerator());
     });
   }
+
+  #calcStatistics(resultStatistics, matchingCount, hasBonusNumber) {
+    if (matchingCount === 6) resultStatistics.firstPrize += 1;
+    if (matchingCount === 5 && hasBonusNumber) resultStatistics.secondPrize += 1;
+    if (matchingCount === 5 && !hasBonusNumber) resultStatistics.thirdPrize += 1;
+    if (matchingCount === 4) resultStatistics.fourthPrize += 1;
+    if (matchingCount === 3) resultStatistics.fifthPrize += 1;
+  }
 }
 
 export default LottoMachine;
-
-/*
-const app = new LottoMachine(2);
-const winningNumbers = [1, 7, 20, 26, 33, 34];
-const bonusNumber = 3;
-console.log(app.getLottoTickets());
-console.log(app.getMatchingLottos(winningNumbers, bonusNumber));
-*/

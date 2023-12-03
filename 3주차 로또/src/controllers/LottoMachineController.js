@@ -17,7 +17,10 @@ class LottoMachineController {
   async start() {
     const printError = (message) => this.#outputView.printErrorMessage(message);
 
-    await errorHandler(async () => await this.#requirePurchaseAmount(), printError);
+    const purchaseAmount = await errorHandler(
+      async () => await this.#requirePurchaseAmount(),
+      printError
+    );
 
     const winningLotto = await errorHandler(
       async () => await this.#requireWinningNumber(),
@@ -28,6 +31,15 @@ class LottoMachineController {
       async () => await this.#requireBonusNumber(winningLotto),
       printError
     );
+
+    const matchingData = this.#domain.getMatchingLottos(winningLotto, bonusNumber);
+
+    const winStatistics = this.#domain.getWinStatistics(matchingData);
+    const totalPrize = this.#domain.getTotalPrize(winStatistics);
+    const profitRatio = this.#domain.getProfitRatio(totalPrize, purchaseAmount);
+
+    this.#outputView.printWinsStatistics(winStatistics);
+    this.#outputView.printProfitRatio(profitRatio);
   }
 
   async #requirePurchaseAmount() {
@@ -42,6 +54,8 @@ class LottoMachineController {
 
     this.#outputView.printPurchaseTicket(ticket);
     this.#outputView.printLottoTicket(lottos);
+
+    return purchaseAmount;
   }
 
   async #requireWinningNumber() {

@@ -1,3 +1,6 @@
+import { CATEGORY, MENU, MENU_PRIZE } from '../constants/constant.js';
+import { splitString } from '../helpers/helper.js';
+
 const Validation = {
   isEmptyString(input) {
     return String(input).trim() === '';
@@ -12,30 +15,29 @@ const Validation = {
   },
 
   isUnique(input) {
-    const items = input.split(',');
-    const uniqueInput = new Set(items);
+    const uniqueInput = new Set(input);
 
-    return uniqueInput.size === items.length;
+    return uniqueInput.size === input.length;
   },
 
   isFormat(input) {
-    const items = input.split(',');
-
-    return items.every((item) => {
+    return input.every((item) => {
       const [key, value] = item.split('-');
 
       return !this.isEmptyString(key) && this.isValidInteger(value);
     });
   },
 
-  // TODO: 고객이 메뉴판에 없는 메뉴를 입력하는 경우
-  isContain() {
-    //...
+  isContain(input) {
+    const menu = Object.keys(MENU_PRIZE);
+
+    return menu.includes(input);
   },
 
-  // TODO: 음료만 주문했는지 확인
-  isOnlyDrink() {
-    //...
+  isOnlyDrink(input) {
+    const drinkMenu = splitString(MENU[CATEGORY.drink]);
+
+    return drinkMenu.includes(input);
   },
 };
 

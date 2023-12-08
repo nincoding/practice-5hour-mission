@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { addCommasToAmount } from '../helpers/helper.js';
 
 const OutputView = {
   printError(message) {
@@ -13,16 +14,19 @@ const OutputView = {
     Console.print(`12월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`);
   },
 
-  // TODO: 메뉴이름 개수 으로 포맷필요
-  printMenu(menu) {
+  printMenu(order) {
     Console.print('<주문 메뉴>');
-    Console.print(menu);
+
+    order.forEach((item) => {
+      const menuName = Object.keys(item)[0];
+      const menuCount = item[menuName];
+      Console.print(`${menuName} ${menuCount}개`);
+    });
   },
 
-  // TODO: 금액 한화기준으로 , 포맷필요
   printTotalOrderAmount(amount) {
     Console.print('<할인 전 총주문 금액>');
-    Console.print(`${amount}원`);
+    Console.print(`${addCommasToAmount(amount)}원`);
   },
 
   printPresentMenu(count) {
@@ -30,22 +34,25 @@ const OutputView = {
     Console.print(`샴페인 ${count}개`);
   },
 
-  // TODO: 혜택 이벤트명 : -할인금액 으로 포맷필요
   printBenefitHistory(benefitHistory) {
     Console.print('<혜택 내역>');
-    Console.print(benefitHistory);
+
+    benefitHistory.forEach((item) => {
+      const benefitName = Object.keys(item)[0];
+      const amount = item[benefitName];
+
+      Console.print(`${benefitName}: -${addCommasToAmount(amount)}원`);
+    });
   },
 
-  // TODO: 금액 한화기준으로 , 포맷필요
   printTotalBenefitAmount(amount) {
     Console.print('<총혜택 금액>');
-    Console.print(`-${amount}원`);
+    Console.print(`-${addCommasToAmount(amount)}원`);
   },
 
-  // TODO: 금액 한화기준으로 , 포맷필요
   printPaymentAmount(amount) {
     Console.print('<할인 후 예상 결제 금액>');
-    Console.print(`${amount}원`);
+    Console.print(`${addCommasToAmount(amount)}원`);
   },
 
   printBadge(badge) {

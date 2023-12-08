@@ -31,11 +31,20 @@ const OutputView = {
 
   printPresentMenu(count) {
     Console.print('<증정 메뉴>');
+
+    if (count === 0) {
+      return Console.print('없음');
+    }
+
     Console.print(`샴페인 ${count}개`);
   },
 
   printBenefitHistory(benefitHistory) {
     Console.print('<혜택 내역>');
+
+    if (benefitHistory.length === 0) {
+      return Console.print('없음');
+    }
 
     benefitHistory.forEach((item) => {
       const benefitName = Object.keys(item)[0];
@@ -47,7 +56,11 @@ const OutputView = {
 
   printTotalBenefitAmount(amount) {
     Console.print('<총혜택 금액>');
-    Console.print(`-${addCommasToAmount(amount)}원`);
+
+    const formattedAmount = addCommasToAmount(amount);
+    const message = amount === 0 ? `${formattedAmount}원` : `-${formattedAmount}원`;
+
+    Console.print(message);
   },
 
   printPaymentAmount(amount) {

@@ -27,4 +27,9 @@ const MENU_PRIZE = Object.freeze({
   샴페인: 25_000,
 });
 
-export { CATEGORY, MENU, MENU_PRIZE };
+const CALENDAR = Object.freeze({
+  weekend: '1,2,8,9,15,16,22,23,29,30',
+  special: '3,10,17,24,25,31',
+});
+
+export { CATEGORY, MENU, MENU_PRIZE, CALENDAR };

@@ -1,7 +1,12 @@
+import EventPlanner from '../domains/EventPlanner.js';
+import User from '../models/User.js';
 import OutputView from '../views/OutputView.js';
 import InputView from '../views/InputView.js';
 
 class EventPlannerController {
+  #domain;
+  #user;
+
   constructor() {
     OutputView.printStart();
   }
@@ -9,6 +14,11 @@ class EventPlannerController {
   async start() {
     const date = await this.handleVisitDate();
     const order = await this.handleOrder();
+
+    this.#user = new User(date, order);
+
+    OutputView.printPreview(this.#user.getVisitDate());
+    OutputView.printMenu(this.#user.getOrder());
   }
 
   async handleVisitDate() {
@@ -19,7 +29,7 @@ class EventPlannerController {
     } catch ({ message }) {
       OutputView.printError(message);
 
-      await this.handleVisitDate();
+      return await this.handleVisitDate();
     }
   }
 
@@ -31,7 +41,7 @@ class EventPlannerController {
     } catch ({ message }) {
       OutputView.printError(message);
 
-      await this.handleOrder();
+      return await this.handleOrder();
     }
   }
 }

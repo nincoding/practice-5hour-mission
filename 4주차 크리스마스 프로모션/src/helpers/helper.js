@@ -23,7 +23,7 @@ export const sumArray = (inputArray) => {
 };
 
 export const addCommasToAmount = (amount) => {
-  const formattedNumber = new Intl.NumberFormat('ko-KR').format(number);
+  const formattedNumber = new Intl.NumberFormat('ko-KR').format(amount);
 
   return formattedNumber;
 };

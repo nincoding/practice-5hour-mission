@@ -17,12 +17,19 @@ const Validator = {
     const validateEmptyString = Validation.isEmptyString(input);
     const splitInput = splitString(input);
     const validateFormat = Validation.isFormat(splitInput);
-
     const [menus, counts] = splitArray(splitInput);
-    const sumCount = sumArray(counts);
 
+    if (validateEmptyString || !validateFormat) {
+      throw new CustomError('유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    }
+
+    this.validateMenu(menus);
+    this.validateCount(counts);
+  },
+
+  validateMenu(menus) {
     const validateUniqueMenus = Validation.isUnique(menus);
-    const validateRangeCounts = Validation.isValidRange(sumCount, 1, 20);
+
     const validateContainMenus = menus.every((menu) => {
       return Validation.isContain(menu);
     });
@@ -30,14 +37,16 @@ const Validator = {
       return Validation.isOnlyDrink(menu);
     });
 
-    if (
-      validateEmptyString ||
-      !validateFormat ||
-      !validateUniqueMenus ||
-      !validateRangeCounts ||
-      !validateContainMenus ||
-      validateOnlyDrink
-    ) {
+    if (!validateUniqueMenus || !validateContainMenus || validateOnlyDrink) {
+      throw new CustomError('유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    }
+  },
+
+  validateCount(counts) {
+    const sumCount = sumArray(counts);
+    const validateRangeCounts = Validation.isValidRange(sumCount, 1, 20);
+
+    if (!validateRangeCounts) {
       throw new CustomError('유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   },

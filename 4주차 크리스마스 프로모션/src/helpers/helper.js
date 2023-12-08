@@ -21,3 +21,9 @@ export const splitArray = (inputArray) => {
 export const sumArray = (inputArray) => {
   return inputArray.reduce((acc, value) => acc + value, 0);
 };
+
+export const addCommasToAmount = (amount) => {
+  const formattedNumber = new Intl.NumberFormat('ko-KR').format(number);
+
+  return formattedNumber;
+};

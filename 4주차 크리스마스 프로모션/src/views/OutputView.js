@@ -15,7 +15,7 @@ const OutputView = {
   },
 
   printMenu(order) {
-    Console.print('<주문 메뉴>');
+    Console.print('\n<주문 메뉴>');
 
     order.forEach((item) => {
       const menuName = Object.keys(item)[0];
@@ -25,12 +25,12 @@ const OutputView = {
   },
 
   printTotalOrderAmount(amount) {
-    Console.print('<할인 전 총주문 금액>');
+    Console.print('\n<할인 전 총주문 금액>');
     Console.print(`${addCommasToAmount(amount)}원`);
   },
 
   printPresentMenu(count) {
-    Console.print('<증정 메뉴>');
+    Console.print('\n<증정 메뉴>');
 
     if (count === 0) {
       return Console.print('없음');
@@ -40,7 +40,7 @@ const OutputView = {
   },
 
   printBenefitHistory(benefitHistory) {
-    Console.print('<혜택 내역>');
+    Console.print('\n<혜택 내역>');
 
     if (benefitHistory.length === 0) {
       return Console.print('없음');
@@ -55,7 +55,7 @@ const OutputView = {
   },
 
   printTotalBenefitAmount(amount) {
-    Console.print('<총혜택 금액>');
+    Console.print('\n<총혜택 금액>');
 
     const formattedAmount = addCommasToAmount(amount);
     const message = amount === 0 ? `${formattedAmount}원` : `-${formattedAmount}원`;
@@ -64,12 +64,12 @@ const OutputView = {
   },
 
   printPaymentAmount(amount) {
-    Console.print('<할인 후 예상 결제 금액>');
+    Console.print('\n<할인 후 예상 결제 금액>');
     Console.print(`${addCommasToAmount(amount)}원`);
   },
 
   printBadge(badge) {
-    Console.print('<12월 이벤트 배지>');
+    Console.print('\n<12월 이벤트 배지>');
     Console.print(badge);
   },
 };

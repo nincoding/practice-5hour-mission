@@ -1,4 +1,4 @@
-import { CALENDAR } from '../constants/constant.js';
+import { CALENDAR, CATEGORY, MENU } from '../constants/constant.js';
 
 const Discount = {
   christmasDayDiscount(date) {
@@ -9,15 +9,40 @@ const Discount = {
     return discountAmount;
   },
 
-  weekdayDiscount(date, order) {},
+  weekdayDiscount(date, order) {
+    const isEventCondition = !CALENDAR.weekend.includes(date);
+    const discountMenus = MENU[CATEGORY.dessert].map((item) => item.menu);
+    const calcDiscount = this.calcDiscountMenu(order, discountMenus);
+    const discountAmount = isEventCondition ? calcDiscount : null;
 
-  weekendDiscount(date, order) {},
+    return discountAmount;
+  },
+
+  weekendDiscount(date, order) {
+    const isEventCondition = CALENDAR.weekend.includes(date);
+    const discountMenus = MENU[CATEGORY.main].map((item) => item.menu);
+    const calcDiscount = this.calcDiscountMenu(order, discountMenus);
+    const discountAmount = isEventCondition ? calcDiscount : null;
+
+    return discountAmount;
+  },
 
   specialDiscount(date) {
     const isEventCondition = CALENDAR.special.includes(date);
     const discountAmount = isEventCondition ? 1000 : null;
 
     return discountAmount;
+  },
+
+  calcDiscountMenu(order, discountMenus) {
+    return order.reduce((acc, item) => {
+      if (discountMenus.includes(item.menu)) {
+        const menuDiscount = item.count * 2023;
+
+        return acc + menuDiscount;
+      }
+      return acc;
+    }, 0);
   },
 };
 

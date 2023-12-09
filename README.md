@@ -13,4 +13,4 @@
 |  1   | 2023.11.26.일<br> 오전 8시 - 오후 1시  |      1주차 - 숫자 야구      |      O      |   3시간    | [1주차 리뷰용 PR](https://github.com/nincoding/practice-5hour-mission/pull/1) |
 |  2   | 2023.12.01.금<br> 오전 10시 - 오후 3시 |     2주차 - 자동차 경주     |      O      | 3시간 20분 | [2주차 리뷰용 PR](https://github.com/nincoding/practice-5hour-mission/pull/2) |
 |  3   | 2023.12.03.일<br> 오후 1시 - 오후 6시  |        3주차 - 로또         |      O      |   4시간    | [3주차 리뷰용 PR](https://github.com/nincoding/practice-5hour-mission/pull/3) |
-|  4   | 2023.12.09.토<br> 오후 1시 - 오후 6시  | 4주차 - 크리스마스 프로모션 |      -      |     -      |                                                                               |
+|  4   | 2023.12.09.토<br> 오후 1시 - 오후 6시  | 4주차 - 크리스마스 프로모션 |      O      | 4시간50분  | [4주차 리뷰용 PR](https://github.com/nincoding/practice-5hour-mission/pull/4) |

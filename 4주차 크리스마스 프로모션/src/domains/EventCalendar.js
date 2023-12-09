@@ -42,7 +42,9 @@ class EventCalendar {
 
   getBadge() {
     const isEventCondition = this.#totalOrderAmount >= 10_000;
-    const badge = isEventCondition ? Event.badge(this.getBenefitsAmount()) : '없음';
+    const benefitsAmount = this.getBenefitsAmount();
+    const badgeEvent = Event.badge(benefitsAmount);
+    const badge = isEventCondition ? badgeEvent : '없음';
 
     return badge;
   }

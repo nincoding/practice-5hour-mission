@@ -1,3 +1,9 @@
+const CALENDAR = Object.freeze({
+  weekend: [1, 2, 8, 9, 15, 16, 22, 23, 29, 30],
+  special: [3, 10, 17, 24, 25, 31],
+  christmas: 25,
+});
+
 const CATEGORY = Object.freeze({
   appetizer: '애피타이저',
   main: '메인',
@@ -67,4 +73,4 @@ const MENU = Object.freeze({
   ],
 });
 
-export { MENU, CATEGORY };
+export { CALENDAR, MENU, CATEGORY };

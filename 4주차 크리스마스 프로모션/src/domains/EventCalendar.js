@@ -1,20 +1,20 @@
 import Discount from '../models/Discount.js';
 import Event from '../models/Event.js';
+import User from '../models/User.js';
 import { CATEGORY, MENU } from '../constants/constant.js';
 
 class EventCalendar {
+  #date;
+  #order;
   #totalOrderAmount;
   #benefitsHistory;
 
   constructor(date, order) {
-    this.date = date;
-    this.order = order;
-    this.#totalOrderAmount = this.#calcTotalOrderAmount();
-    this.#benefitsHistory = this.getBenefitsHistory();
+    this.#init(date, order);
   }
 
   getTotalOrderAmount() {
-    return this.#calcTotalOrderAmount;
+    return this.#calcTotalOrderAmount();
   }
 
   getBenefitsHistory() {
@@ -47,12 +47,20 @@ class EventCalendar {
     return badge;
   }
 
+  #init(date, order) {
+    const user = new User(date, order);
+    this.#date = user.getDate();
+    this.#order = user.getOrder();
+    this.#totalOrderAmount = this.#calcTotalOrderAmount();
+    this.#benefitsHistory = this.getBenefitsHistory();
+  }
+
   #calcTotalOrderAmount() {
     const allMenus = Object.values(MENU).flatMap((category) => {
       return category.map((menu) => ({ [menu.menu]: menu.prize }));
     });
 
-    const totalOrderAmount = this.order.reduce((total, { menu, count }) => {
+    const totalOrderAmount = this.#order.reduce((total, { menu, count }) => {
       return total + allMenus.find(({ [menu]: price }) => price)[menu] * count;
     }, 0);
 
@@ -67,10 +75,10 @@ class EventCalendar {
       }
     };
 
-    addEventToHistory('크리스마스 디데이 할인', Discount.christmasDayDiscount(this.date));
-    addEventToHistory('평일 할인', Discount.weekdayDiscount(this.date, this.order));
-    addEventToHistory('주말 할인', Discount.weekendDiscount(this.date, this.order));
-    addEventToHistory('특별 할인', Discount.specialDiscount(this.date));
+    addEventToHistory('크리스마스 디데이 할인', Discount.christmasDayDiscount(this.#date));
+    addEventToHistory('평일 할인', Discount.weekdayDiscount(this.#date, this.#order));
+    addEventToHistory('주말 할인', Discount.weekendDiscount(this.#date, this.#order));
+    addEventToHistory('특별 할인', Discount.specialDiscount(this.#date));
     addEventToHistory('증정 이벤트', Discount.presentDiscount(this.getPresent()));
 
     return benefitsHistory;

@@ -4,11 +4,13 @@ import { CATEGORY, MENU } from '../constants/constant.js';
 
 class EventCalendar {
   #totalOrderAmount;
+  #benefitsHistory;
 
   constructor(date, order) {
     this.date = date;
     this.order = order;
     this.#totalOrderAmount = this.#calcTotalOrderAmount();
+    this.#benefitsHistory = this.getBenefitsHistory();
   }
 
   getTotalOrderAmount() {
@@ -24,6 +26,10 @@ class EventCalendar {
 
   getPresent() {
     return Event.present(this.#totalOrderAmount);
+  }
+
+  getBenefitsAmount() {
+    return this.#benefitsHistory !== null ? this.#calcBenefitsAmount() : null;
   }
 
   #calcTotalOrderAmount() {
@@ -54,12 +60,22 @@ class EventCalendar {
 
     return benefitsHistory;
   }
+
+  #calcBenefitsAmount() {
+    const totalBenefitsAmount = this.#benefitsHistory.reduce((total, entry) => {
+      const value = Object.values(entry)[0];
+      return total + value;
+    }, 0);
+
+    return totalBenefitsAmount;
+  }
 }
 
 export default EventCalendar;
 
 /*
-const order = [{ menu: '티본스테이크', count: 5 }];
-new EventCalendar(2, order).getBenefitsHistory();
-new EventCalendar(3, order).getPresent();
+const order = [{ menu: '티본스테이크', count: 1 }];
+const event = new EventCalendar(2, order);
+event.getBenefitsHistory();
+event.getBenefitsAmount();
 */

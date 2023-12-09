@@ -35,11 +35,11 @@ const Discount = {
   },
 
   presentDiscount(present) {
+    if (present === null) return null;
     const presentMenu = MENU[CATEGORY.drink].find((item) => item.menu === Object.keys(present)[0]);
     const presentPrice = presentMenu.prize * Object.values(present)[0];
-    const discountAmount = present !== null ? presentPrice : null;
 
-    return discountAmount;
+    return presentPrice;
   },
 
   calcDiscountMenu(order, discountMenus) {

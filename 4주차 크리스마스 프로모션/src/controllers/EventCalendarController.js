@@ -1,7 +1,10 @@
+import EventCalendar from '../domains/EventCalendar.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 
 class EventCalendarController {
+  #eventCalendar;
+
   constructor() {
     OutputView.printStart();
   }
@@ -9,6 +12,12 @@ class EventCalendarController {
   async start() {
     const date = await this.#handleDate();
     const order = await this.#handleOrder();
+    OutputView.printPreview(date);
+    OutputView.printMenu(order);
+
+    this.#eventCalendar = new EventCalendar(date, order);
+    const result = this.#setResultData();
+    this.#printResult(result);
   }
 
   async #handleDate() {
@@ -35,7 +44,32 @@ class EventCalendarController {
     }
   }
 
-  #printResult() {}
+  #setResultData() {
+    const totalOrderAmount = this.#eventCalendar.getTotalOrderAmount();
+    const present = this.#eventCalendar.getPresent();
+    const benefitsHistory = this.#eventCalendar.getBenefitsHistory();
+    const benefitsAmount = this.#eventCalendar.getBenefitsAmount();
+    const estimatedPaymentAmount = this.#eventCalendar.getEstimatedPaymentAmount();
+    const badge = this.#eventCalendar.getBadge();
+
+    return {
+      totalOrderAmount,
+      present,
+      benefitsHistory,
+      benefitsAmount,
+      estimatedPaymentAmount,
+      badge,
+    };
+  }
+
+  #printResult(result) {
+    OutputView.printTotalOrderAmount(result.totalOrderAmount);
+    OutputView.printPresent(result.present);
+    OutputView.printBenefitsHistory(result.benefitsHistory);
+    OutputView.printBenefitsAmount(result.benefitsAmount);
+    OutputView.printEstimatedPaymentAmount(result.estimatedPaymentAmount);
+    OutputView.printBadge(result.badge);
+  }
 }
 
 export default EventCalendarController;

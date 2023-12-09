@@ -29,7 +29,15 @@ class EventCalendar {
   }
 
   getBenefitsAmount() {
-    return this.#benefitsHistory !== null ? this.#calcBenefitsAmount() : null;
+    return this.#benefitsHistory !== null ? this.#calcBenefitsAmount() : 0;
+  }
+
+  getEstimatedPaymentAmount() {
+    return (
+      this.#totalOrderAmount -
+      this.getBenefitsAmount() +
+      Discount.presentDiscount(this.getPresent())
+    );
   }
 
   #calcTotalOrderAmount() {
@@ -47,7 +55,7 @@ class EventCalendar {
   #calcBenefitsHistory() {
     const benefitsHistory = [];
     const addEventToHistory = (eventName, discountAmount) => {
-      if (discountAmount !== null && discountAmount !== 0) {
+      if (discountAmount !== 0) {
         benefitsHistory.push({ [eventName]: discountAmount });
       }
     };
@@ -74,8 +82,9 @@ class EventCalendar {
 export default EventCalendar;
 
 /*
-const order = [{ menu: '티본스테이크', count: 1 }];
-const event = new EventCalendar(2, order);
-event.getBenefitsHistory();
-event.getBenefitsAmount();
+const order = [{ menu: '아이스크림', count: 1 }];
+const event = new EventCalendar(25, order);
+console.log(event.getBenefitsHistory());
+console.log(event.getBenefitsAmount());
+console.log(event.getEstimatedPaymentAmount());
 */

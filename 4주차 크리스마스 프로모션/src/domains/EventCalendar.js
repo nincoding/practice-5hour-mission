@@ -40,6 +40,13 @@ class EventCalendar {
     );
   }
 
+  getBadge() {
+    const isEventCondition = this.#totalOrderAmount >= 10_000;
+    const badge = isEventCondition ? Event.badge(this.getBenefitsAmount()) : '없음';
+
+    return badge;
+  }
+
   #calcTotalOrderAmount() {
     const allMenus = Object.values(MENU).flatMap((category) => {
       return category.map((menu) => ({ [menu.menu]: menu.prize }));
@@ -80,11 +87,3 @@ class EventCalendar {
 }
 
 export default EventCalendar;
-
-/*
-const order = [{ menu: '아이스크림', count: 1 }];
-const event = new EventCalendar(25, order);
-console.log(event.getBenefitsHistory());
-console.log(event.getBenefitsAmount());
-console.log(event.getEstimatedPaymentAmount());
-*/

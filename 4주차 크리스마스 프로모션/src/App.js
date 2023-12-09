@@ -1,5 +1,15 @@
+import EventCalendarController from './controllers/EventCalendarController.js';
+
 class App {
-  async run() {}
+  #controller;
+
+  constructor() {
+    this.#controller = new EventCalendarController();
+  }
+
+  async run() {
+    await this.#controller.start();
+  }
 }
 
 export default App;

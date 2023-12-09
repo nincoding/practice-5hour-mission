@@ -4,7 +4,7 @@ const Discount = {
   christmasDayDiscount(date) {
     const isEventCondition = date <= CALENDAR.christmas;
     const calcDiscount = 1000 + (date - 1) * 100;
-    const discountAmount = isEventCondition ? calcDiscount : null;
+    const discountAmount = isEventCondition ? calcDiscount : 0;
 
     return discountAmount;
   },
@@ -13,7 +13,7 @@ const Discount = {
     const isEventCondition = !CALENDAR.weekend.includes(date);
     const discountMenus = MENU[CATEGORY.dessert].map((item) => item.menu);
     const calcDiscount = this.calcDiscountMenu(order, discountMenus);
-    const discountAmount = isEventCondition ? calcDiscount : null;
+    const discountAmount = isEventCondition ? calcDiscount : 0;
 
     return discountAmount;
   },
@@ -22,20 +22,20 @@ const Discount = {
     const isEventCondition = CALENDAR.weekend.includes(date);
     const discountMenus = MENU[CATEGORY.main].map((item) => item.menu);
     const calcDiscount = this.calcDiscountMenu(order, discountMenus);
-    const discountAmount = isEventCondition ? calcDiscount : null;
+    const discountAmount = isEventCondition ? calcDiscount : 0;
 
     return discountAmount;
   },
 
   specialDiscount(date) {
     const isEventCondition = CALENDAR.special.includes(date);
-    const discountAmount = isEventCondition ? 1000 : null;
+    const discountAmount = isEventCondition ? 1000 : 0;
 
     return discountAmount;
   },
 
   presentDiscount(present) {
-    if (present === null) return null;
+    if (present === null) return 0;
     const presentMenu = MENU[CATEGORY.drink].find((item) => item.menu === Object.keys(present)[0]);
     const presentPrice = presentMenu.prize * Object.values(present)[0];
 

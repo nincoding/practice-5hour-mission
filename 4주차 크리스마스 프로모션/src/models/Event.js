@@ -5,7 +5,7 @@ const Event = {
     const desiredMenu = '샴페인';
     const presentItem = MENU[CATEGORY.drink].find((item) => item.menu === desiredMenu);
 
-    return totalAmount >= 120_000 ? { [presentItem.menu]: 1 } : {};
+    return totalAmount >= 120_000 ? { [presentItem.menu]: 1 } : null;
   },
 
   badge(totalBenefitAmount) {

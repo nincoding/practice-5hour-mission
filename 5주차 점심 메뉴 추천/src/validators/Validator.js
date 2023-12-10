@@ -23,7 +23,15 @@ const Validator = {
     }
   },
 
-  validateHateMenus(input) {},
+  validateHateMenus(input) {
+    if (!Validation.isValidMaxCount(input, 2)) {
+      throw new CustomError(ERROR_MESSAGE.invalidHateMenuMaxCount);
+    }
+
+    if (!Validation.isEmptyString(input) && !Validation.isContain(input)) {
+      throw new CustomError(ERROR_MESSAGE.invalidContainMenu);
+    }
+  },
 };
 
 export default Validator;

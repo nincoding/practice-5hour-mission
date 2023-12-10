@@ -64,6 +64,8 @@ class RecommendController {
         hateMenusByUser.push({ name, hateMenus });
       } catch ({ message }) {
         OutputView.printError(message);
+
+        return await this.#handleHateMenus();
       }
     }
 

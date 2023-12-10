@@ -23,11 +23,11 @@ const Validation = {
   },
 
   isContain(input) {
-    const allMenus = Object.values(MENU).flatMap((category) => {
-      return category.map((menu) => menu.menu);
-    });
+    const allMenus = Object.values(MENU).flatMap((category) => category.split(', '));
+    const inputMenus = splitString(input);
+    const allMenusIncludeInputMenus = inputMenus.every((menu) => allMenus.includes(menu));
 
-    return allMenus.includes(input);
+    return allMenusIncludeInputMenus;
   },
 };
 

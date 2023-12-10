@@ -1,4 +1,4 @@
-import Validator from '../../validators/Validator.js';
+import Validator from '../validators/Validator.js';
 
 class User {
   #name;

@@ -3,6 +3,7 @@ import User from '../models/User.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import { splitString } from '../helpers/helpers.js';
+import { RECOMMEND_DAY } from '../constants/constant.js';
 
 class RecommendController {
   #recommend;
@@ -14,10 +15,26 @@ class RecommendController {
 
   async start() {
     await this.#handleName();
+    await this.#handleHateMenus();
 
-    const hateMenusByUser = await this.#handleHateMenus();
+    this.#recommend = new Recommend();
 
-    this.#recommend = new Recommend(hateMenusByUser);
+    for (const user of this.#users) {
+      const hateMenus = user.getHateMenus();
+      const recommendMenus = this.#recommend.getRecommendMenus(hateMenus);
+
+      user.setRecommendMenus(recommendMenus);
+    }
+
+    const result = [
+      { 구분: RECOMMEND_DAY },
+      { 카테고리: this.#recommend.getRecommendCategories() },
+      ...this.#users.map((user) => ({
+        [user.getUserName()]: user.getRecommendMenus(),
+      })),
+    ];
+
+    this.#printResult(result);
   }
 
   async #handleName() {
@@ -51,6 +68,10 @@ class RecommendController {
     }
 
     return hateMenusByUser;
+  }
+
+  #printResult(result) {
+    OutputView.printResult(result);
   }
 }
 

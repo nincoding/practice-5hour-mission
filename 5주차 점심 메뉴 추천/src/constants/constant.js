@@ -6,4 +6,6 @@ const MENU = Object.freeze({
   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 });
 
-export { MENU };
+const RECOMMEND_DAY = Object.freeze(['월요일', '화요일', '수요일', '목요일', '금요일']);
+
+export { MENU, RECOMMEND_DAY };

@@ -27,19 +27,20 @@ class Recommend {
   }
 
   #calcRecommendMenus(hateMenus) {
-    const recommendMenus = [];
+    const recommendMenus = new Set();
 
-    for (const category of this.#recommendCategories) {
+    while (recommendMenus.size < 5) {
+      const category = this.#recommendCategories[recommendMenus.size];
       let menu;
 
       do {
         menu = new Menu(category).getMenu();
-      } while (hateMenus.includes(menu) && recommendMenus.includes(menu));
+      } while (hateMenus.includes(menu) || recommendMenus.has(menu));
 
-      recommendMenus.push(menu);
+      recommendMenus.add(menu);
     }
 
-    return recommendMenus;
+    return Array.from(recommendMenus);
   }
 }
 

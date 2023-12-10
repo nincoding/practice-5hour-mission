@@ -4,13 +4,16 @@ import Menu from '../models/Menu.js';
 class Recommend {
   #recommendCategories = [];
 
-  constructor(hateMenusByUser) {
-    console.log(hateMenusByUser);
+  constructor() {
     this.#calcRecommendCategories();
   }
 
   getRecommendCategories() {
     return this.#recommendCategories;
+  }
+
+  getRecommendMenus(hateMenus) {
+    return this.#calcRecommendMenus(hateMenus);
   }
 
   #calcRecommendCategories() {
@@ -22,9 +25,22 @@ class Recommend {
       }
     }
   }
+
+  #calcRecommendMenus(hateMenus) {
+    const recommendMenus = [];
+
+    for (const category of this.#recommendCategories) {
+      let menu;
+
+      do {
+        menu = new Menu(category).getMenu();
+      } while (hateMenus.includes(menu) && recommendMenus.includes(menu));
+
+      recommendMenus.push(menu);
+    }
+
+    return recommendMenus;
+  }
 }
 
 export default Recommend;
-
-const re = new Recommend();
-console.log(re.getRecommendCategories());

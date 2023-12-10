@@ -9,7 +9,7 @@ class Menu {
   }
 
   getMenu() {
-    return console.log(this.#menu);
+    return this.#menu;
   }
 
   #recommendMenu(category) {

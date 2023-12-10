@@ -1,3 +1,4 @@
+import { splitString } from '../helpers/helpers.js';
 import { MENU } from '../constants/constant.js';
 
 const Validation = {
@@ -5,10 +6,20 @@ const Validation = {
     return String(input).trim() === '';
   },
 
-  isUnique(input) {
-    const uniqueInput = new Set(input);
+  isValidMinCount(input, minCount) {
+    const inputsArray = splitString(input);
 
-    return uniqueInput.size === input.length;
+    return inputsArray.length >= minCount;
+  },
+
+  isValidMaxCount(input, maxCount) {
+    const inputsArray = splitString(input);
+
+    return inputsArray.length <= maxCount;
+  },
+
+  isValidLength(input, minLength, maxLength) {
+    return input.length >= minLength && input.length <= maxLength;
   },
 
   isContain(input) {

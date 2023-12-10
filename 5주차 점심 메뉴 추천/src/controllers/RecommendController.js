@@ -1,9 +1,11 @@
+import Recommend from '../domains/Recommend.js';
 import User from '../models/User.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import { splitString } from '../helpers/helpers.js';
 
 class RecommendController {
+  #recommend;
   #users = [];
 
   constructor() {
@@ -14,6 +16,8 @@ class RecommendController {
     await this.#handleName();
 
     const hateMenusByUser = await this.#handleHateMenus();
+
+    this.#recommend = new Recommend(hateMenusByUser);
   }
 
   async #handleName() {

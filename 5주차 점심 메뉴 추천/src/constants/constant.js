@@ -8,4 +8,9 @@ const MENU = Object.freeze({
 
 const RECOMMEND_DAY = Object.freeze(['월요일', '화요일', '수요일', '목요일', '금요일']);
 
-export { MENU, RECOMMEND_DAY };
+const RESULT_PREFIX = Object.freeze({
+  differentiate: '구분',
+  category: '카테고리',
+});
+
+export { MENU, RECOMMEND_DAY, RESULT_PREFIX };

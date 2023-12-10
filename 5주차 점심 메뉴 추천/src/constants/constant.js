@@ -13,4 +13,22 @@ const RESULT_PREFIX = Object.freeze({
   category: '카테고리',
 });
 
-export { MENU, RECOMMEND_DAY, RESULT_PREFIX };
+const CONDITION = Object.freeze({
+  categoryMinRange: 1,
+  categoryMaxRange: 5,
+  namesMinCount: 2,
+  namesMaxCount: 5,
+  nameMinLength: 2,
+  nameMaxLength: 4,
+  hateMenuMaxCount: 2,
+});
+
+const SYMBOL = Object.freeze({
+  commaSpace: ', ',
+  emptyString: '',
+  headerStart: '[ ',
+  separatorBar: ' | ',
+  headerEnd: ' ]',
+});
+
+export { MENU, RECOMMEND_DAY, RESULT_PREFIX, CONDITION, SYMBOL };

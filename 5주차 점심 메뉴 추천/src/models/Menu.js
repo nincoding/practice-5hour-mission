@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { MENU } from '../constants/constant.js';
+import { MENU, SYMBOL } from '../constants/constant.js';
 
 class Menu {
   #menu;
@@ -13,7 +13,7 @@ class Menu {
   }
 
   #recommendMenu(category) {
-    const categoryMenus = MENU[category].split(', ');
+    const categoryMenus = MENU[category].split(SYMBOL.commaSpace);
     const categoryMenusIndex = categoryMenus.map((_, index) => index + 1);
     const menuIndex = Random.shuffle(categoryMenusIndex)[0];
 

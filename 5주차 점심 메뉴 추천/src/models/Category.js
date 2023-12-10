@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { MENU } from '../constants/constant.js';
+import { MENU, CONDITION } from '../constants/constant.js';
 
 class Category {
   #category;
@@ -14,7 +14,10 @@ class Category {
 
   #recommendCategroy() {
     const categories = Object.keys(MENU);
-    const categoryIndex = Random.pickNumberInRange(1, 5);
+    const categoryIndex = Random.pickNumberInRange(
+      CONDITION.categoryMinRange,
+      CONDITION.categoryMaxRange
+    );
 
     this.#category = categories[categoryIndex - 1];
   }

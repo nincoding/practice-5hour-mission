@@ -1,9 +1,9 @@
 import { splitString } from '../helpers/helpers.js';
-import { MENU } from '../constants/constant.js';
+import { MENU, SYMBOL } from '../constants/constant.js';
 
 const Validation = {
   isEmptyString(input) {
-    return String(input).trim() === '';
+    return String(input).trim() === SYMBOL.emptyString;
   },
 
   isValidMinCount(input, minCount) {
@@ -23,7 +23,7 @@ const Validation = {
   },
 
   isContain(input) {
-    const allMenus = Object.values(MENU).flatMap((category) => category.split(', '));
+    const allMenus = Object.values(MENU).flatMap((category) => category.split(SYMBOL.commaSpace));
     const inputMenus = splitString(input);
     const allMenusIncludeInputMenus = inputMenus.every((menu) => allMenus.includes(menu));
 

@@ -21,6 +21,7 @@ const CONDITION = Object.freeze({
   nameMinLength: 2,
   nameMaxLength: 4,
   hateMenuMaxCount: 2,
+  overLapMenuCount: 2,
 });
 
 const SYMBOL = Object.freeze({

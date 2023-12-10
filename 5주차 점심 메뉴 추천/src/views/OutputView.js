@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT_MESSAGE } from '../constants/messages.js';
+import { OUTPUT_MESSAGE } from '../../constants/messages.js';
 
 const OutputView = {
   printError(message) {
@@ -7,7 +7,7 @@ const OutputView = {
   },
 
   printStart() {
-    Console.print(OUTPUT_MESSAGE.printStart());
+    Console.print(OUTPUT_MESSAGE.printStart);
   },
 };
 

@@ -4,25 +4,24 @@ import OutputView from '../views/OutputView.js';
 import { splitString } from '../helpers/helpers.js';
 
 class RecommendController {
-  #userNames;
-  #user;
+  #users = [];
 
   constructor() {
     OutputView.printStart();
   }
 
   async start() {
-    this.#userNames = await this.#handleName();
+    await this.#handleName();
 
-    console.log(this.#userNames);
+    const hateMenusByUser = await this.#handleHateMenus();
   }
 
   async #handleName() {
     try {
       const names = await InputView.readCoachNames();
-      const name = splitString(names);
+      const nameArray = splitString(names);
 
-      this.#user = new User(name);
+      this.#users = nameArray.map((name) => new User(name));
 
       return names;
     } catch ({ message }) {
@@ -30,6 +29,24 @@ class RecommendController {
 
       return await this.#handleName();
     }
+  }
+
+  async #handleHateMenus() {
+    const hateMenusByUser = [];
+
+    for (const user of this.#users) {
+      try {
+        const name = user.getUserName();
+        const hateMenus = await InputView.readHateMenus(name);
+        user.setHateMenus(hateMenus);
+
+        hateMenusByUser.push({ name, hateMenus });
+      } catch ({ message }) {
+        OutputView.printError(message);
+      }
+    }
+
+    return hateMenusByUser;
   }
 }
 

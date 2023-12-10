@@ -2,6 +2,7 @@ import Validator from '../../validators/Validator.js';
 
 class User {
   #name;
+  #hateMenus;
 
   constructor(name) {
     this.#validate(name);
@@ -10,6 +11,14 @@ class User {
 
   getUserName() {
     return this.#name;
+  }
+
+  setHateMenus(hateMenus) {
+    this.#hateMenus = hateMenus;
+  }
+
+  getHateMenus() {
+    return this.#hateMenus;
   }
 
   #validate(name) {
